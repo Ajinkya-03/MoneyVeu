@@ -1,10 +1,9 @@
 import React from 'react'
-
-
-function index() {
+import "./style.css";
+function Header() {
   return (
-    <div>Header page</div>
+    <div className="navbar">Header</div>
   )
 }
 
-export default index
+export default Header
