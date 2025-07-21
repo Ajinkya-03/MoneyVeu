@@ -1,0 +1,32 @@
+.btn {
+  color: var(--black);
+  text-align: center;
+  margin: 1rem 0rem;
+
+  padding: 0.5rem !important;
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: auto !important;
+}
+
+.btn:hover {
+  background-color: var(--black);
+  color: var(--white);
+  transition: all 0.3s;
+}
+
+.btn-black {
+  background-color: var(--black);
+  color: var(--white)
+}
+
+.btn-black:hover {
+  background-color: #fff !important;
+  color: var(--black) !important;
+  transition: all 0.3s;
+}

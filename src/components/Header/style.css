@@ -1,6 +1,31 @@
 .navbar{
-    background-color: black;
-    color: white;
-    height: 250px;
-    text-align: center;
+    background-color: var(--black);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+}
+
+.logo{
+    font-weight: 600;
+    font-size: x-large;
+    padding-left: 30px;
+    margin: 0;
+}
+.logout{
+    cursor: pointer;
+    padding-right: 30px;
+    font-weight: 200;
+    font-size: 1.2rem;
+    
+    color: var(--white);
+    padding: 3px 10px;
+    border-radius: 7px;
+}
+.logout:hover{
+    text-decoration: underline;
 }
