@@ -12,7 +12,7 @@ function SignupSigninComponent() {
 
   return (
     <div className="signup-wrapper">
-      <h2 className="title">Sign-up on <span style={{color:"black"}}>MoneyVeu</span></h2>
+      <h2 className="title">Sign-up on <span style={{color:"blue"}}>MoneyVeu</span></h2>
       <form>
         <Input 
         lable={"Full Name"} 
