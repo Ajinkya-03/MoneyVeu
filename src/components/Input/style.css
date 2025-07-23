@@ -1,21 +1,25 @@
-.lable-input{
-    text-transform: capitalize;
-    margin-bottom: 0.5rem;
-    font-size: x-large;
+.input-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
 }
 
-.input-wrapper{
-    margin-bottom: 1.5rem;
+.input-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
 }
 
-.custom-input{
-    border-width: 0;
-    border-bottom-width: 1px;
-    width: 100%;
-    padding: 0.5rem 0rem;
-    font-size: 1.2rem;
+.input-field {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
 }
 
-.custom-input:focus{
-    outline: none;
+.input-field:focus {
+  border: 1.5px solid #007bff;
 }

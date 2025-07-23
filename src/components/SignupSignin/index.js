@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import "./style.css";
 import Input from '../Input';
 import Button from '../Button';
+import {createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { toast } from "react-toastify"; 
 
 function SignupSigninComponent() {
 
@@ -9,6 +12,36 @@ function SignupSigninComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  function signupWithEmail() {
+    setLoading(true);
+
+    if (name !== "" && email !== "" && password !== "" && confirmPass !== "") {
+      if (password === confirmPass) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed up 
+            toast.success("User Created Successfully!");
+            setLoading(false);
+            setName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPass("");
+          })
+          .catch((error) => {
+            toast.error(error.message); // Show actual error
+            setLoading(false);
+          });
+      } else {
+        toast.error("Password And Confirm Password Don't Match!");
+        setLoading(false);
+      }
+    } else {
+      toast.error("All Fields Are Required");
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="signup-wrapper">
@@ -22,6 +55,7 @@ function SignupSigninComponent() {
         />
 
         <Input 
+          type="email"
           label="Email" 
           state={email} 
           setState={setEmail} 
@@ -29,23 +63,27 @@ function SignupSigninComponent() {
         />
         
         <Input 
+          type="password"
           label="Password" 
           state={password} 
-          setState={setPassword}
-          type="password" 
+          setState={setPassword} 
           placeholder="say123" 
         />
 
         <Input 
+          type="password" 
           label="Confirm Password" 
           state={confirmPass} 
           setState={setConfirmPass} 
-          type="password" 
           placeholder="say123" 
         />
 
-        <Button text="Signup Using Email and Password" />
+        <Button  
+        text="Signup Using Email and Password"
+        OnClick={signupWithEmail}/>
+
         <p style={{ textAlign: "center" }}>OR</p>
+        
         <Button text="Signup Using Google" black={true} />
       </form>
     </div>
