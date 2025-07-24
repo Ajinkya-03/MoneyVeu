@@ -3,7 +3,7 @@ import "./style.css";
 import Input from '../Input';
 import Button from '../Button';
 import {createUserWithEmailAndPassword , signInWithEmailAndPassword , signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth , db } from "../../firebase";
+import { auth , db , provider } from "../../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore"; 
 import { toast } from "react-toastify"; 
 import { useNavigate } from "react-router";
@@ -97,25 +97,32 @@ function SignupSigninComponent() {
 
 
   function googleAuth(){
-      signInWithPopup(auth, provider)
+      setLoading(true)
+
+      try{
+
+        signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
+        toast.success("User Succfully Authenticated")
+        
       }).catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
         const email = error.customData.email;
+        toast.error("Login Error");
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
+
+      }
+      catch(e){toast.error(e.message)}
+      
   }
 
   return (
@@ -147,7 +154,7 @@ function SignupSigninComponent() {
 
         <p style={{ textAlign: "center" }}>OR</p>
         
-        <Button text="Login Using Google" black={true} />
+        <Button OnClick={googleAuth} text="Login Using Google" black={true} />
 
         <p onClick={()=>setLoginForm(!loginForm)} style={{ textAlign: "center" ,cursor:"pointer" }}>
           Or don't have an account already? Click Here..</p>
@@ -195,7 +202,7 @@ function SignupSigninComponent() {
 
         <p style={{ textAlign: "center" }}>OR</p>
         
-        <Button text="Signup Using Google" black={true} />
+        <Button OnClick={googleAuth} text="Signup Using Google" black={true} />
 
         <p onClick={()=>setLoginForm(!loginForm)} style={{ textAlign: "center" ,cursor:"pointer"}}>Or have an account already? Click Here..</p>
       </form>
