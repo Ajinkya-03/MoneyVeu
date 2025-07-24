@@ -1,15 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./style.css";
-function Header() {
+import { auth } from '../../firebase';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router";
 
+function Header() {
+  
+  const [user , loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user)
+    {
+      navigate("/dashboard");
+    }
+  
+  }, [user, loading])
+  
+  
   function logoutfnc(){
+
     alert("Logged out!!")
   }
 
   return (
     <div className="navbar">
     <p className='logo'>MoneyVue</p>
-    <p className="logout" onClick={logoutfnc}>Logout</p>
+    {user &&(
+      <p className="logout" onClick={logoutfnc}>Logout</p>
+    )}
+    
     </div>
   )
 }

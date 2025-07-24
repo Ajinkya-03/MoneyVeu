@@ -107,21 +107,28 @@ function SignupSigninComponent() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        toast.success("User Succfully Authenticated")
+        setLoading(false);
+        createDoc(user);
+        toast.success("User Successfully Authenticated");
+        navigate("/dashboard");
         
       }).catch((error) => {
+        setLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
         const email = error.customData.email;
-        toast.error("Login Error");
+        toast.error(errorMessage);
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
 
       }
-      catch(e){toast.error(e.message)}
+      catch(e){
+        setLoading(false);  
+        toast.error(e.message);
+      }
       
   }
 
