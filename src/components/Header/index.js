@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import "./style.css";
 import { auth } from '../../firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { signOut } from 'firebase/auth';
+import { toast } from "react-toastify"; 
 
 function Header() {
   
@@ -18,11 +20,17 @@ function Header() {
   }, [user, loading])
   
   
-  function logoutfnc(){
-
-    alert("Logged out!!")
+  function logoutfnc() {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logged out successfully");
+        navigate("/");  
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
-
+    
   return (
     <div className="navbar">
     <p className='logo'>MoneyVue</p>
@@ -33,5 +41,6 @@ function Header() {
     </div>
   )
 }
+
 
 export default Header
