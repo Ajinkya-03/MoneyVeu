@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify"; 
 import Header from '../components/Header'
 import Cards from '../components/Cards'
@@ -6,12 +6,13 @@ import Modal from 'antd/es/modal/Modal';
 import AddExpense from '../components/Modals/addExpense';
 import AddIncome from '../components/Modals/addIncome';
 import moment from "moment";
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection , query, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Dashboard() {
   const [user] = useAuthState(auth)
+  const [transaction , setTransactions] = useState([])
   const [isExpenseModalVisible, setIsExpenseModalVisible] = useState(false);
   const [isIncomeModalVisible, setIsIncomeModalVisible] = useState(false);
   
@@ -54,6 +55,24 @@ function Dashboard() {
       toast.error("Couldn't add transaction");
     }
   }
+   
+  useEffect (()=>{
+    fetchTransactions();
+  } ,[]);
+
+
+  async function fetchTransactions() {
+  if (user) {
+    const q = query(collection(db, `users/${user.uid}/transactions`));
+    const querySnapshot = await getDocs(q);
+    let transactionsArray = [];
+    querySnapshot.forEach((doc) => {
+      transactionsArray.push(doc.data());
+    });
+    setTransactions(transactionsArray);
+    toast.success("Transactions Fetched!");
+  }
+}
 
   return (
     <div>
