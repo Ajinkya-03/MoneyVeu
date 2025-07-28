@@ -124,6 +124,7 @@ function Dashboard() {
         onFinish={onFinish}
       />
 
+      
       <TransactionTable transaction={transaction}/>
 
     </div>

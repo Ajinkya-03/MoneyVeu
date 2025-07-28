@@ -1,0 +1,21 @@
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* space between input and select */
+  margin-bottom: 24px;
+}
+
+.filter-bar input,
+.filter-bar .select-input {
+  font-size: 1rem;
+  padding: 8px 12px;
+}
+
+.filter-bar .select-input{
+    padding: 1px 10px;
+}   
+
+.tt{
+    margin: 25px 25px;
+}
