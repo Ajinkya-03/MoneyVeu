@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./style.css";
 import { Select, Table } from 'antd';
 import { FaSearch } from "react-icons/fa";
+import { unparse, parse } from "papaparse";
 
 function TransactionTable({transaction}) {
   const { Option } = Select;
@@ -36,6 +37,20 @@ function TransactionTable({transaction}) {
   },
 ];
 
+    function exportToCsv() {
+      const csv = unparse(transaction, {
+        fields: ["name", "type", "date", "amount", "tag"],
+      });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "transactions.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  }
+
   let filterTransaction = transaction.filter((item)=>item.tag.toLowerCase().includes(search.toLowerCase()) 
                           && item.type.includes(typeFilter));
 
@@ -65,7 +80,7 @@ function TransactionTable({transaction}) {
           <Option value="expense">Expense</Option>
         </Select>
       </div>
-      <button className="import-csv-btn">Import CSV</button>
+      <button onClick={exportToCsv} className="import-csv-btn">Export to CSV</button>
     </div>
     <Table className="tt" dataSource={filterTransaction} columns={columns} />
   </>
