@@ -19,6 +19,7 @@ function Dashboard() {
   const [income , setIncome] = useState(0);
   const [expense , setExpense] = useState(0);
   const [balance , setBalance] = useState(0);
+  const resetBalance = () => { setBalance(0)};
   
   const showExpenseModal = () => {
     setIsExpenseModalVisible(true);
@@ -112,6 +113,7 @@ function Dashboard() {
         showIncomeModal={showIncomeModal}
         handleExpenseCancel={handleExpenseCancel}
         handleIncomeCancel={handleIncomeCancel}
+        resetBalance={resetBalance}
       />
       <AddExpense
         isExpenseModalVisible={isExpenseModalVisible}
