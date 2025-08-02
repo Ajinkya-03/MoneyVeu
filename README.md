@@ -42,7 +42,11 @@ npm start
 Ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/) 
+- [npm](https://www.npmjs.com/)
+- npm ant-desing (for tables,cards)
+- npm react-router-dom
+- npm react-icons
+- Google firebase
 
 
 ### 💻Installation
