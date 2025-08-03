@@ -66,10 +66,11 @@ function AddExpense({
             <Select.Option value="food">Food</Select.Option>
             <Select.Option value="education">Education</Select.Option>
             <Select.Option value="office">Office</Select.Option>
-            <Select.Option value="office">Grocery</Select.Option>
-            <Select.Option value="office">Self</Select.Option>
-            <Select.Option value="office">Vehical</Select.Option>
-            {/* Add more tags here */}
+            <Select.Option value="grocery">Grocery</Select.Option>
+            <Select.Option value="self">Self</Select.Option>
+            <Select.Option value="vehical">Vehical</Select.Option>
+            <Select.Option value="rent">Rent</Select.Option>
+            {/* Can add more tags here */}
           </Select>
         </Form.Item>
         <Form.Item>

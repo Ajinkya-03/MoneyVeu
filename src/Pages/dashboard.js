@@ -10,6 +10,8 @@ import { addDoc, collection , query, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import TransactionTable from '../components/TransacTable';
+import Chart from '../components/Charts';
+import NoTransac from '../components/NoTransac';
 
 function Dashboard() {
   const [user] = useAuthState(auth)
@@ -102,6 +104,10 @@ function Dashboard() {
   }
 }
 
+  let sortedTranscation = transaction.sort((a,b)=>{
+    return new Date(a.date)- new Date(b.date);
+  })
+
   return (
     <div>
       <Header />
@@ -115,6 +121,9 @@ function Dashboard() {
         handleIncomeCancel={handleIncomeCancel}
         resetBalance={resetBalance}
       />
+
+      { transaction.length!=0 ? <Chart sortedTranscation={sortedTranscation} /> :<NoTransac />}
+
       <AddExpense
         isExpenseModalVisible={isExpenseModalVisible}
         handleExpenseCancel={handleExpenseCancel}
