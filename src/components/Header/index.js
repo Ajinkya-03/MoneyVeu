@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { toast } from "react-toastify"; 
+import { FaSignOutAlt } from "react-icons/fa";
 
 function Header() {
   
@@ -35,7 +36,7 @@ function Header() {
     <div className="navbar">
     <p className='logo'>MoneyVue</p>
     {user &&(
-      <p className="logout" onClick={logoutfnc}>Logout</p>
+      <p className="logout" onClick={logoutfnc}>Logout <FaSignOutAlt style={{ position: "relative", top: "2px" }}/></p>
     )}
     
     </div>
