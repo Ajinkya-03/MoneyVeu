@@ -1,4 +1,4 @@
-# 📱MoneyVeu- Tracker Ur Expense
+# 📱MoneyVeu- Track Ur Expense
 
 Moneyveu is a simple and intuitive personal finance tracking application that helps users monitor their daily expenses, savings, and financial habits. Designed with a clean and responsive interface, it allows users to record income and spending, categorize transactions, and visualize their financial data effortlessly and export in the CSVfile
 
